@@ -51,7 +51,7 @@ if (!$client->ping()) {
 
 $queue = $client->subscribe('test_subject');
 
-sleep(5);
+//sleep(5);
 
 $message = $queue->fetch();
 
