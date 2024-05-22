@@ -42,18 +42,17 @@ $configuration->setDelay(0.001, Configuration::DELAY_LINEAR);
 // exponential delay mode - first retry be in 10ms, second in 100ms, third in 1s, fourth if 10 seconds, etc...
 $configuration->setDelay(0.01, Configuration::DELAY_EXPONENTIAL);
 
+// ping nats:
 
 $client = new Client($configuration);
 
-if (!$client->ping()) {
-	echo "pinged NOT ok" . PHP_EOL;
-}
+if (!$client->ping()) die('no ping; no nats');
 
-$queue = $client->subscribe('test_subject');
+$queue = $client->subscribe('stock/aex');
 
-$client->publish('test_subject', 'hello');
+$client->publish('stock/aex', '09672-klm:87.95');
 
 $message = $queue->fetch();
 
-echo "payload: " . $message->payload->body . PHP_EOL;
+echo "payload: " . $message->payload . PHP_EOL;
 
