@@ -51,9 +51,10 @@ if (!$client->ping()) {
 
 $queue = $client->subscribe('test_subject');
 
-//sleep(5);
+sleep(5);
 
 $message = $queue->fetch();
 
-echo "payload: " . $message->payload->body . PHP_EOL;
+//var_export($message);
 
+echo "payload: " . $message->payload->body . PHP_EOL;
